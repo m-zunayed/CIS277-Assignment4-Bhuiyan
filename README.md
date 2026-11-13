@@ -88,6 +88,60 @@ This gives the inorder sequence:
 
 ## Tests and Results
 
+### Demonstration Results
+
+The actual results from `main.cpp` matched my predictions for both trees.
+
+| Result | Tree A | Tree B |
+|---|---|---|
+| Preorder | 50 30 20 40 70 60 80 | 10 30 5 20 15 |
+| Inorder | 20 30 40 50 60 70 80 | 30 5 10 20 15 |
+| Postorder | 20 40 30 60 80 70 50 | 5 30 15 20 10 |
+| Level order | 50 30 70 20 40 60 80 | 10 30 20 5 15 |
+| Nodes | 7 | 5 |
+| Leaves | 4 | 2 |
+| Height in levels | 3 | 3 |
+| Sum | 350 | 80 |
+
+After calling `destroyTree` on both trees, both root pointers were `nullptr`.
+
+### Student Tests
+
+| Test | Input / Shape | Expected Result | Actual Result | Corrections |
+|---|---|---|---|---|
+| Empty tree and repeated destruction | `nullptr` | Empty traversals, nodes 0, leaves 0, height 0, sum 0, and repeated destruction is safe | All checks passed and the root remained `nullptr` | None |
+| Singleton | One node with value `-4` | Preorder, inorder, postorder, and level order: `-4`; nodes 1, leaves 1, height 1, sum -4 | All expected results matched | None |
+| Four-node left-only chain | `4 -> 3 -> 2 -> 1` using left children | Preorder: `4 3 2 1`; inorder: `1 2 3 4`; postorder: `1 2 3 4`; level order: `4 3 2 1`; nodes 4, leaves 1, height 4, sum 10 | All expected traversals and measurements matched | None |
+| Four-node right-only chain | `4 -> 3 -> 2 -> 1` using right children | Preorder: `4 3 2 1`; inorder: `4 3 2 1`; postorder: `1 2 3 4`; level order: `4 3 2 1`; nodes 4, leaves 1, height 4, sum 10 | All expected traversals and measurements matched | None |
+| Duplicate, zero, and negative values | Root 0; children -2 and -2; left -2 has right child 0 | Preorder: `0 -2 0 -2`; inorder: `-2 0 0 -2`; postorder: `0 -2 -2 0`; level order: `0 -2 -2 0`; nodes 4, leaves 2, height 3, sum -4 | All four nodes appeared in every traversal, including both `-2` values and both `0` values. All expected measurements matched | None |
+| Repeated traversals and changed returned vector | Root 7 with children 3 and 9 | Changing one returned vector must not change the tree or later traversal results | Later preorder remained `7 3 9`; inorder remained `3 7 9`; node count stayed 3 and sum stayed 19 | None |
+| Destroy, rebuild, and destroy again | First tree: 5 with children 2 and 8. Rebuilt tree: -1 with left child -2 | First root becomes `nullptr`; rebuilt tree has preorder `-1 -2`, inorder `-2 -1`, postorder `-2 -1`, level order `-1 -2`, nodes 2, leaves 1, height 2, sum -3; second destruction is safe | Both destructions cleared the root and all rebuilt-tree results matched | None |
+| Additional uneven tree | Root 8; left 4 with right child 6; right 12 with left child 10 | Preorder: `8 4 6 12 10`; inorder: `4 6 8 10 12`; postorder: `6 4 10 12 8`; level order: `8 4 12 6 10`; nodes 5, leaves 2, height 3, sum 40 | All expected traversals and measurements matched | None |
+
+For these two chain tests, preorder, postorder, and level order are the same. Inorder is different because the left-only chain is visited from the bottom up, while the right-only chain is visited from the top down.
+
+All student tests passed.
+
+### Memory Check
+
+I ran the macOS `leaks` tool on both executables.
+
+For the student tests:
+
+`leaks --atExit -- ./student_tests`
+
+Result: `0 leaks for 0 total leaked bytes.`
+
+For the demonstration program:
+
+`leaks --atExit -- ./tree_explorer`
+
+Result: `0 leaks for 0 total leaked bytes.`
+
+### Public Validator
+
+Public validator result will be added after running the supplied Assignment 4 validator.
+
 ## Analysis Questions
 
 ## AI Use
