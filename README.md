@@ -140,7 +140,15 @@ Result: `0 leaks for 0 total leaked bytes.`
 
 ### Public Validator
 
-Public validator result will be added after running the supplied Assignment 4 validator.
+I ran the supplied public validator with:
+
+`python3 validate.py`
+
+Result: `PASS: 96 public behavioral checks`
+
+The validator also compiled the demonstration successfully and finished with:
+
+`PASS: public preflight completed.`
 
 ## Analysis Questions
 
